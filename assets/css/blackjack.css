@@ -19,8 +19,8 @@ p {
 
     /* Add background image */
     background-image: url('/assets/img/backgrounds/green.jpg');
-    /* background-image: url('/assets/img/backgrounds/blue.jpg'); */
-    /* background-image: url('/assets/img/backgrounds/orange.jpg'); */
+    /* background-image: url('assets/img/backgrounds/blue.jpg'); */
+    /* background-image: url('assets/img/backgrounds/orange.jpg'); */
 
     background-size: cover;
     /* background-position: center;  */
