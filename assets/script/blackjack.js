@@ -93,7 +93,7 @@ function dealerTurn(houseDeck) {
         dealerCardOneHidden = houseDeck.pop();
 
         let cardImg = document.createElement("img");
-        cardImg.src = "/blackjack//assets/img/cards/back.png";
+        cardImg.src = "/blackjack/assets/img/cards/back.png";
 
         // Assign an ID for easy access when targeting card to flip
         cardImg.id = "dealer_hidden_card"; 
@@ -111,7 +111,7 @@ function dealerTurn(houseDeck) {
     
             cardImg = document.createElement("img");
 
-            cardImg.src = "/blackjack//assets/img/cards/" + dealerCard + ".png";
+            cardImg.src = "/blackjack/assets/img/cards/" + dealerCard + ".png";
             document.getElementById("dealer_cards_div").append(cardImg);
     
             dScore = dScoreUpdate(dealerCard, dScore);
@@ -131,7 +131,7 @@ function flipDealerCard() {
     // Uses id name given "dealer_hidden_card" to target the card 
     let hiddenCardImg = document.getElementById("dealer_hidden_card");
 
-    hiddenCardImg.src = "/blackjack//assets/img/cards/" + dealerCardOneHidden + ".png";
+    hiddenCardImg.src = "/blackjack/assets/img/cards/" + dealerCardOneHidden + ".png";
 
     dScore = dScoreUpdate(dealerCardOneHidden, dScore);
 }
@@ -147,7 +147,7 @@ function playerTurn(houseDeck) {
 
         cardImg = document.createElement("img");
 
-        cardImg.src = "/blackjack//assets/img/cards/" + playerCard + ".png";
+        cardImg.src = "/blackjack/assets/img/cards/" + playerCard + ".png";
         document.getElementById("player_cards_div").append(cardImg);
 
         pScore = pScoreUpdate(playerCard, pScore);
