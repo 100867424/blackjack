@@ -1,5 +1,9 @@
 body {
     margin: 0;
+    background-size: cover;
+    background-image: url('/blackjack/assets/img/backgrounds/green.jpg');
+    /* background-image: url('/blackjack/assets/img/backgrounds/blue.jpg'); */
+    /* background-image: url('/blackjack/assets/img/backgrounds/orange.jpg'); */
 }
 
 h1 {
@@ -11,13 +15,13 @@ h1 {
 
 
 #blackjack_table {
-    margin: auto;
+    margin: 10% auto;
+    padding: 20px;
+    max-width: 600px;
     text-align: center;
-    height: 100vh;
-    background-size: cover;
-    background-image: url('/blackjack/assets/img/backgrounds/green.jpg');
-    /* background-image: url('/blackjack/assets/img/backgrounds/blue.jpg'); */
-    /* background-image: url('/blackjack/assets/img/backgrounds/orange.jpg'); */
+    border: 5px solid salmon;
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px rgba(250, 128, 114, 0.5);
 }
 
 #dealer_div {
@@ -59,20 +63,6 @@ h1 {
     opacity: 1;
 }
 
-#new_game_button {
-    color: bisque;
-    background-color: #a504d1;
-    margin-top: 20px;
-    width: 90px;
-    height: 40px;
-    font-size: .75em;
-    font-weight: bold;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 2px 2px 20px rgb(117, 2, 123);
-}
-
 
 #dealer_cards_div img,
 #player_cards_div img {
@@ -97,8 +87,40 @@ h1 {
     font-weight: bold;
 }
 
+#bet_button {
+    color: bisque;
+    background-color: #a504d1;
+    width: 90px;
+    height: 40px;
+    font-size: .75em;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 20px rgb(117, 2, 123);
+}
+
+.bet_amt {
+    color: bisque;
+    background-color: #a504d1;
+    width: 60px;
+    height: 30px;
+    font-size: .75em;
+    font-weight: bold;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 600px) {
+
+
+    #blackjack_table {
+        margin: 0;
+        height: 100vh;
+        border-radius: 0;
+    }
 
     #dealer_cards_div img,
     #player_cards_div img {
@@ -123,7 +145,7 @@ h1 {
         padding-left: 10px;
     }
 
-    #new_game_button {
+    #bet_button {
         margin-top: 10px;
         border-radius: 10px;
         font-weight: bold;
