@@ -1,10 +1,11 @@
 function startScreen() {
 
+    bank = 500;
+
     for(let i = 0; i < 2; i++) {
 
         let cardImg = document.createElement("img");
         cardImg.src = "/blackjack/assets/img/cards/back.png";
-    
         document.getElementById("dealer_cards_div").append(cardImg);
     
         cardImg = document.createElement("img");
@@ -13,11 +14,46 @@ function startScreen() {
 
         document.getElementById("hit_button").disabled = true;
         document.getElementById("stand_button").disabled = true;
+        document.getElementById("deal_button").disabled = true;
 
     }
 
     document.getElementById("dealer_score").innerHTML = dScore;
     document.getElementById("player_score").innerHTML = pScore;
+    document.getElementById("player_bank").innerHTML = bank;
+    document.getElementById("player_bet").innerHTML = totalBet;
+    document.getElementById("message").innerHTML = "Place Bet!";
+
+}
+
+
+function newDeal() {
+
+    // Reset scores and card counts
+    dScore = 0;
+    pScore = 0;
+    dCardCount = 1;
+    pCardCount = 1;
+    dealerCardOneHidden = "";
+    
+    // Clear displayed scores
+    document.getElementById("dealer_score").innerHTML = "0";
+    document.getElementById("player_score").innerHTML = "0";
+
+    document.getElementById("dWinner").innerHTML = "";
+    document.getElementById("pWinner").innerHTML = "";
+
+    // Clear the dealer's and player's card display areas
+    document.getElementById("dealer_cards_div").innerHTML = "";
+    document.getElementById("player_cards_div").innerHTML = "";
+
+    // Enable Hit and Stand buttons
+    document.getElementById("hit_button").disabled = false;
+    document.getElementById("stand_button").disabled = false;
+    // Disable Deal Button
+    document.getElementById("deal_button").disabled = true;
+
+    document.getElementById("message").innerHTML = "Hit or Stand!";
 
 }
 
@@ -37,7 +73,6 @@ function generateDeck() {
     }
 
     return deck;
-
 }
 
 
@@ -77,7 +112,6 @@ function loadGame(){
         playerTurn(houseDeck);
 
     }
-
 }
 
 function flipDealerCard() {
@@ -88,20 +122,18 @@ function flipDealerCard() {
     hiddenCardImg.src = "/blackjack/assets/img/cards/" + dealerCardOneHidden + ".png";
 
     dScoreUpdate(dealerCardOneHidden);
-
 }
 
 
 function dealerTurn() {
 
-        let dealerCard = houseDeck.pop();
-    
-        let cardImg = document.createElement("img");
-        cardImg.src = "/blackjack/assets/img/cards/" + dealerCard + ".png";
-        document.getElementById("dealer_cards_div").append(cardImg);
+    let dealerCard = houseDeck.pop();
 
-        dScoreUpdate(dealerCard);
+    let cardImg = document.createElement("img");
+    cardImg.src = "/blackjack/assets/img/cards/" + dealerCard + ".png";
+    document.getElementById("dealer_cards_div").append(cardImg);
 
+    dScoreUpdate(dealerCard);
 }
 
 
@@ -114,7 +146,6 @@ function playerTurn() {
     document.getElementById("player_cards_div").append(cardImg);
 
     pScoreUpdate(playerCard);
-
 }
 
 
@@ -136,7 +167,6 @@ function dScoreUpdate(dCard) {
     }
 
     document.getElementById("dealer_score").innerHTML = dScore;
-
 }
 
 
@@ -158,7 +188,6 @@ function pScoreUpdate(pCard) {
     }
 
     document.getElementById("player_score").innerHTML = pScore;
-
 }
 
 
@@ -166,60 +195,78 @@ function checkWinner() {
 
     if(dScore > pScore && dScore < 22) {
 
-        document.getElementById("pWinner").innerHTML = "LOSE";
+        result = "LOSE";
+        document.getElementById("pWinner").innerHTML = result;
     
     } else if (pScore > dScore && pScore < 22) {
     
-        document.getElementById("pWinner").innerHTML = "WIN";
+        result = "WIN";
+        document.getElementById("pWinner").innerHTML = result;
+        
         
     } else if (dScore == pScore && dScore < 22 && pScore < 22) {
 
-        document.getElementById("pWinner").innerHTML = "PUSH";
+        result = "PUSH";
+        document.getElementById("pWinner").innerHTML = result;
 
     } else if (dScore > 21 && pScore < 22) {
 
-        document.getElementById("pWinner").innerHTML = "WIN";
-
+        result = "WIN";
+        document.getElementById("pWinner").innerHTML = result;
+        
     } else if (pScore > 21) {
 
-        document.getElementById("pWinner").innerHTML = "BUST";
+        result = "BUST";
+        document.getElementById("pWinner").innerHTML = result;
     }
 
+
+    if (result == "WIN") {
+        bank = bank + (totalBet * 2);
+    } else if (result == "PUSH") {
+        bank = bank + totalBet;
+    }
+   
+    totalBet = 0;
+
+    document.getElementById("player_bank").innerHTML = bank;
+    document.getElementById("player_bet").innerHTML = totalBet;
+
+    document.getElementById("message").innerHTML = "Place Bet!";
 }
 
 
-function resetGame() {
+function betUpdate() {
 
-    // Reset scores and card counts
-    dScore = 0;
-    pScore = 0;
-    dCardCount = 1;
-    pCardCount = 1;
-    dealerCardOneHidden = "";
-    
-    // Clear displayed scores
-    document.getElementById("dealer_score").innerHTML = "0";
-    document.getElementById("player_score").innerHTML = "0";
+    if (betAmt > bank) {
 
-    document.getElementById("dWinner").innerHTML = "";
-    document.getElementById("pWinner").innerHTML = "";
+        document.getElementById("message").innerHTML = "Balance to low!";
+        
+    } else {
 
-    // Clear the dealer's and player's card display areas
-    document.getElementById("dealer_cards_div").innerHTML = "";
-    document.getElementById("player_cards_div").innerHTML = "";
+        totalBet = totalBet + betAmt;
+        bank = bank - betAmt;
 
-    // Enable Hit and Stand buttons
-    document.getElementById("hit_button").disabled = false;
-    document.getElementById("stand_button").disabled = false;
+        document.getElementById("message").innerHTML = "Deal After Betting!";
 
+    }
+
+    document.getElementById("player_bank").innerHTML = bank;
+    document.getElementById("player_bet").innerHTML = totalBet;
+
+    document.getElementById("deal_button").disabled = false;
 }
 
 
 // Global Variables 
+let bank = 0;
+let betAmt = 0;
+let totalBet = 0;
 let dScore = 0;
 let pScore = 0;
 let dCardCount = 1;
 let pCardCount = 1;
+let result = "";
 let dealerCardOneHidden = "";
 let houseDeck = [];
 
@@ -228,7 +275,7 @@ startScreen();
 // Attach event listener to the deal_button button
 document.getElementById("deal_button").onclick = function() {
 
-    resetGame();
+    newDeal();
     loadGame();
 }
 
@@ -249,7 +296,6 @@ document.getElementById("hit_button").onclick = function() {
 
         checkWinner();
     }
-
 }
 
 // Attach event listener to the stand_button button
@@ -265,4 +311,44 @@ document.getElementById("stand_button").onclick = function() {
     }
 
     checkWinner();
+}
+
+
+// Attach event listener to the bet_amt_5 button
+document.getElementById("bet_amt_5").onclick = function() {
+
+    betAmt = 5;
+    betUpdate();
+}
+
+
+// Attach event listener to the bet_amt_10 button
+document.getElementById("bet_amt_10").onclick = function() {
+
+    betAmt = 10;
+    betUpdate();
+}
+
+
+// Attach event listener to the bet_amt_25 button
+document.getElementById("bet_amt_25").onclick = function() {
+
+    betAmt = 25;
+    betUpdate();
+}
+
+
+// Attach event listener to the bet_amt_50 button
+document.getElementById("bet_amt_50").onclick = function() {
+
+    betAmt = 50;
+    betUpdate();
+}
+
+
+// Attach event listener to the bet_amt_ button
+document.getElementById("bet_amt_100").onclick = function() {
+
+    betAmt = 100;
+    betUpdate();
 }
