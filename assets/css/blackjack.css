@@ -77,7 +77,7 @@ h1 {
 
 #dealer_cards_div img,
 #player_cards_div img {
-    width: 75px;
+    width: 125px;
     border-radius: 10px;
     padding: 2px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
@@ -90,9 +90,9 @@ h1 {
 }
 
 
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 600px) {
     #dealer_cards_div img,
     #player_cards_div img {
-        width: 150px;
+        width: 75px;
     }
 }
