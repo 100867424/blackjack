@@ -180,10 +180,9 @@ function checkWinner() {
 
         document.getElementById("pWinner").innerHTML = "WIN";
 
-    } else if (pScore > 21 && dScore < 22) {
+    } else if (pScore > 21) {
 
         document.getElementById("pWinner").innerHTML = "BUST";
-
     }
 
 }
