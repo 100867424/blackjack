@@ -53,6 +53,13 @@ function newDeal() {
     // Disable Deal Button
     document.getElementById("deal_button").disabled = true;
 
+    document.getElementById("bet_amt_5").disabled = true;
+    document.getElementById("bet_amt_10").disabled = true;
+    document.getElementById("bet_amt_25").disabled = true;
+    document.getElementById("bet_amt_50").disabled = true;
+    document.getElementById("bet_amt_100").disabled = true;
+    
+
     document.getElementById("message").innerHTML = "Hit or Stand!";
 
 }
@@ -231,6 +238,12 @@ function checkWinner() {
 
     document.getElementById("player_bank").innerHTML = bank;
     document.getElementById("player_bet").innerHTML = totalBet;
+
+    document.getElementById("bet_amt_5").disabled = false;
+    document.getElementById("bet_amt_10").disabled = false;
+    document.getElementById("bet_amt_25").disabled = false;
+    document.getElementById("bet_amt_50").disabled = false;
+    document.getElementById("bet_amt_100").disabled = false;
 
     document.getElementById("message").innerHTML = "Place Bet!";
 }
