@@ -1,10 +1,10 @@
 body {
+    position: relative;
     margin: 0;
-    background-size: cover;
-    background-position: center;
     background-image: url('/blackjack/assets/img/backgrounds/green.jpg');
     /* background-image: url('/blackjack/assets/img/backgrounds/blue.jpg'); */
     /* background-image: url('/blackjack/assets/img/backgrounds/orange.jpg'); */
+    
 }
 
 h1 {
