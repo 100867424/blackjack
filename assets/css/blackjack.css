@@ -4,6 +4,7 @@ body {
     font-size: 1.75em;
     color: rgb(227, 195, 153);
     background-color: rgb(10, 50, 19);
+    height: 100vh;
 }
 
 p {
