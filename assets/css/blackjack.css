@@ -143,13 +143,20 @@ h1 {
     background-color: #b90909;
 }
 
+#dealer_cards_div, 
+#player_cards_div {
+    width: 100%; 
+    height: 190px;
+}
+
 
 @media screen and (max-width: 600px) {
 
-    #dealer_card_div, #player_card_div {
-        width: 100%;  
-        height: 200px;
-      }
+    #dealer_cards_div, 
+    #player_cards_div {
+        min-width: 80px;  
+        height: 125px;
+    }
 
     #dealer_cards_div img,
     #player_cards_div img {
