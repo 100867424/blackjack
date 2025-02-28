@@ -19,9 +19,7 @@ h1 {
     padding: 20px;
     max-width: 600px;
     text-align: center;
-    border: 5px solid salmon;
-    border-radius: 20px;
-    box-shadow: 10px 10px 20px rgba(250, 128, 114, 0.5);
+
 }
 
 #dealer_div {
@@ -114,13 +112,6 @@ h1 {
 
 
 @media screen and (max-width: 600px) {
-
-
-    #blackjack_table {
-        margin: 0;
-        height: 100vh;
-        border-radius: 0;
-    }
 
     #dealer_cards_div img,
     #player_cards_div img {
