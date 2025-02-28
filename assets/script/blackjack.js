@@ -15,6 +15,11 @@ function startScreen() {
         document.getElementById("stand_button").disabled = true;
 
     }
+
+    document.getElementById("dealer_score").innerHTML = dScore;
+    document.getElementById("player_score").innerHTML = dScore;
+
+    
 }
 
 function generateDeck() {
