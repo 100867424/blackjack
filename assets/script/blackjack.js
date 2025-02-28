@@ -1,3 +1,22 @@
+function startScreen() {
+
+    for(let i = 0; i < 2; i++) {
+
+        let cardImg = document.createElement("img");
+        cardImg.src = "/blackjack/assets/img/cards/back.png";
+    
+        document.getElementById("dealer_cards_div").append(cardImg);
+    
+        cardImg = document.createElement("img");
+        cardImg.src = "/blackjack/assets/img/cards/back.png";
+        document.getElementById("player_cards_div").append(cardImg);
+
+        document.getElementById("hit_button").disabled = true;
+        document.getElementById("stand_button").disabled = true;
+
+    }
+}
+
 function generateDeck() {
 
     let deck = [];
@@ -73,15 +92,9 @@ function loadGame(){
         }
 
         checkWinner();
-    
     }
 
-    // Attach event listener to the new game button
-    document.getElementById("new_game_button").onclick = function() {
-
-        restartGame();
-
-    }
+    return;
 
 }
 
@@ -234,6 +247,8 @@ function checkWinner() {
         document.getElementById("pWinner").innerHTML = "Bust";
 
     }
+
+    return;
 }
 
 
@@ -263,11 +278,7 @@ function restartGame() {
     // Generate and shuffle a new deck
     houseDeck = shuffleDeck(generateDeck());
 
-    // Deal two cards to each player
-    for (let i = 0; i < 2; i++) {
-        dealerTurn(houseDeck);
-        playerTurn(houseDeck);
-    }
+    return;
 }
 
 
@@ -279,4 +290,12 @@ let pCardCount = 1;
 let dealerCardOneHidden = "";
 let houseDeck = [];
 
-loadGame();
+
+startScreen();
+
+// Attach event listener to the new game button
+document.getElementById("deal_button").onclick = function() {
+
+    restartGame();
+    loadGame();
+}
