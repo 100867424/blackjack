@@ -144,6 +144,7 @@ h1 {
 
     #dealer_cards_div img,
     #player_cards_div img {
+        margin-left: -40px;
         width: 80px;
         border-radius: 0px;
     }
