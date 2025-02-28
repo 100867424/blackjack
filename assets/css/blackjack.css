@@ -63,7 +63,7 @@ h1 {
     color: bisque;
     background-color: #a504d1;
     margin-top: 20px;
-    width: 100px;
+    width: 90px;
     height: 40px;
     font-size: .75em;
     font-weight: bold;
@@ -71,7 +71,6 @@ h1 {
     border: none;
     cursor: pointer;
     box-shadow: 2px 2px 20px rgb(117, 2, 123);
-
 }
 
 
@@ -91,9 +90,44 @@ h1 {
 
 
 @media screen and (max-width: 600px) {
+
     #dealer_cards_div img,
     #player_cards_div img {
-        width: 75px;
+        width: 65px;
         border-radius: 0px;
     }
+
+    h1 {
+        padding-top: 10px;
+        font-size: 1.75em;
+    }
+
+    .score_text {
+        margin-bottom: 3.5px;
+        color: beige;
+        font-size: 1.15em;
+    }
+
+    #player_score,
+    #dealer_score {
+        padding-left: 10px;
+    }
+
+    #new_game_button {
+        margin-top: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+        width: 80px;
+        height: 30px;
+    }
+
+    #hit_button,
+    #stand_button {
+        width: 80px;
+        height: 30px;
+        margin-top: 10px;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
 }
