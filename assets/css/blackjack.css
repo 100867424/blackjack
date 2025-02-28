@@ -1,5 +1,4 @@
 body {
-    width: 100%;
     height: 100vh;
     background-image: url('/blackjack/assets/img/backgrounds/green.jpg');
     /* background-image: url('/blackjack/assets/img/backgrounds/blue.jpg'); */
@@ -102,7 +101,7 @@ h1 {
 
     #dealer_cards_div img,
     #player_cards_div img {
-        width: 100px;
+        width: 80px;
     }
    
 }
