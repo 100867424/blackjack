@@ -17,10 +17,10 @@ function startScreen() {
     }
 
     document.getElementById("dealer_score").innerHTML = dScore;
-    document.getElementById("player_score").innerHTML = dScore;
+    document.getElementById("player_score").innerHTML = pScore;
 
-    
 }
+
 
 function generateDeck() {
 
@@ -37,112 +37,48 @@ function generateDeck() {
     }
 
     return deck;
+
 }
 
 
+// Fisher-Yates shuffle algorithm:
 function shuffleDeck(deck) {
 
-    let tempDeck = [];
+    for (let i = deck.length - 1; i > 0; i--) {
 
-    for(let i = 0; i < 52; i++) {
+        let j = Math.floor(Math.random() * (i + 1));
 
-        let cardIndex = Math.floor(Math.random() * deck.length);
-
-        let card = deck.splice(cardIndex, 1)[0];
-
-        tempDeck.push(card);
+        // Swap elements
+        [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 
-    return tempDeck;
+    return deck;
 }
 
 
 function loadGame(){
 
-    houseDeck = shuffleDeck(generateDeck());
+    houseDeck = generateDeck();
+
+    houseDeck = shuffleDeck(houseDeck);
+
+    dealerCardOneHidden = houseDeck.pop();
+
+    let cardImg = document.createElement("img");
+    cardImg.src = "/blackjack/assets/img/cards/back.png";
+    // Assign an ID for easy access when targeting card to flip
+    cardImg.id = "dealer_hidden_card"; 
+    document.getElementById("dealer_cards_div").append(cardImg);
+
+    dealerTurn(houseDeck);
 
     for(let i = 0; i < 2; i++) {
-        dealerTurn(houseDeck);
+
         playerTurn(houseDeck);
+
     }
-
-    document.getElementById("hit_button").onclick = function() {
-        playerTurn(houseDeck); 
-    
-        if (pScore > 21) {
-            document.getElementById("hit_button").disabled = true;
-            document.getElementById("stand_button").disabled = true;
-    
-            flipDealerCard();
-    
-            // Dealer plays until they reach at least 17
-            while (dScore < 17) {
-                dealerTurn(houseDeck);
-            }
-
-            checkWinner();
-        }
-    
-    }
-    
-    document.getElementById("stand_button").onclick = function() {
-    
-        document.getElementById("hit_button").disabled = true;
-        document.getElementById("stand_button").disabled = true;
-    
-        flipDealerCard();
-    
-        while (dScore < 17) {
-            dealerTurn(houseDeck);
-        }
-
-        checkWinner();
-    }
-
-    return;
 
 }
-
-
-function dealerTurn(houseDeck) {
-
-    if(dCardCount == 1) {
-
-        dealerCardOneHidden = houseDeck.pop();
-
-        let cardImg = document.createElement("img");
-        cardImg.src = "/blackjack/assets/img/cards/back.png";
-
-        // Assign an ID for easy access when targeting card to flip
-        cardImg.id = "dealer_hidden_card"; 
-
-        document.getElementById("dealer_cards_div").append(cardImg);
-        dCardCount++;
-
-    } else {
-
-        while(true) {
-
-            let dealerCard = houseDeck.pop();
-
-            let cardImg = "cardImg" + dCardCount;
-    
-            cardImg = document.createElement("img");
-
-            cardImg.src = "/blackjack/assets/img/cards/" + dealerCard + ".png";
-            document.getElementById("dealer_cards_div").append(cardImg);
-    
-            dScore = dScoreUpdate(dealerCard, dScore);
-    
-            dCardCount++;
-    
-            break;
-        }
-    }
-
-    return dealerCardOneHidden;
-}
-
 
 function flipDealerCard() {
 
@@ -151,33 +87,38 @@ function flipDealerCard() {
 
     hiddenCardImg.src = "/blackjack/assets/img/cards/" + dealerCardOneHidden + ".png";
 
-    dScore = dScoreUpdate(dealerCardOneHidden, dScore);
+    dScoreUpdate(dealerCardOneHidden);
+
 }
 
 
-function playerTurn(houseDeck) {
+function dealerTurn() {
 
-    while(true) {
+        let dealerCard = houseDeck.pop();
+    
+        let cardImg = document.createElement("img");
+        cardImg.src = "/blackjack/assets/img/cards/" + dealerCard + ".png";
+        document.getElementById("dealer_cards_div").append(cardImg);
 
-        let playerCard = houseDeck.pop();
+        dScoreUpdate(dealerCard);
 
-        let cardImg = "cardImg" + pCardCount;
-
-        cardImg = document.createElement("img");
-
-        cardImg.src = "/blackjack/assets/img/cards/" + playerCard + ".png";
-        document.getElementById("player_cards_div").append(cardImg);
-
-        pScore = pScoreUpdate(playerCard, pScore);
-
-        pCardCount++;
-
-        break;
-    }
 }
 
 
-function dScoreUpdate(dCard, dScore) {
+function playerTurn() {
+
+    let playerCard = houseDeck.pop();
+
+    let cardImg = document.createElement("img");
+    cardImg.src = "/blackjack/assets/img/cards/" + playerCard + ".png";
+    document.getElementById("player_cards_div").append(cardImg);
+
+    pScoreUpdate(playerCard);
+
+}
+
+
+function dScoreUpdate(dCard) {
 
     dCard = dCard.split("-");
     let cardVal = dCard[0];
@@ -196,11 +137,10 @@ function dScoreUpdate(dCard, dScore) {
 
     document.getElementById("dealer_score").innerHTML = dScore;
 
-    return dScore;
 }
 
 
-function pScoreUpdate(pCard, pScore) {
+function pScoreUpdate(pCard) {
 
     pCard = pCard.split("-");
     let cardVal = pCard[0];
@@ -219,7 +159,6 @@ function pScoreUpdate(pCard, pScore) {
 
     document.getElementById("player_score").innerHTML = pScore;
 
-    return pScore;
 }
 
 
@@ -227,37 +166,31 @@ function checkWinner() {
 
     if(dScore > pScore && dScore < 22) {
 
-        document.getElementById("dWinner").innerHTML = "Winner";
+        document.getElementById("pWinner").innerHTML = "LOSE";
     
     } else if (pScore > dScore && pScore < 22) {
     
-        document.getElementById("pWinner").innerHTML = "Winner";
+        document.getElementById("pWinner").innerHTML = "WIN";
         
     } else if (dScore == pScore && dScore < 22 && pScore < 22) {
 
-        document.getElementById("pWinner").innerHTML = "Push";
-        document.getElementById("dWinner").innerHTML = "Push";
+        document.getElementById("pWinner").innerHTML = "PUSH";
 
     } else if (dScore > 21 && pScore < 22) {
 
-        document.getElementById("pWinner").innerHTML = "Winner";
+        document.getElementById("pWinner").innerHTML = "WIN";
 
     } else if (pScore > 21 && dScore < 22) {
 
-        document.getElementById("dWinner").innerHTML = "Winner";
-
-    } else {
-
-        document.getElementById("dWinner").innerHTML = "Bust";
-        document.getElementById("pWinner").innerHTML = "Bust";
+        document.getElementById("pWinner").innerHTML = "BUST";
 
     }
 
-    return;
 }
 
 
-function restartGame() {
+function resetGame() {
+
     // Reset scores and card counts
     dScore = 0;
     pScore = 0;
@@ -280,14 +213,10 @@ function restartGame() {
     document.getElementById("hit_button").disabled = false;
     document.getElementById("stand_button").disabled = false;
 
-    // Generate and shuffle a new deck
-    houseDeck = shuffleDeck(generateDeck());
-
-    return;
 }
 
 
-// Game Start
+// Global Variables 
 let dScore = 0;
 let pScore = 0;
 let dCardCount = 1;
@@ -295,12 +224,46 @@ let pCardCount = 1;
 let dealerCardOneHidden = "";
 let houseDeck = [];
 
-
 startScreen();
 
-// Attach event listener to the new game button
+// Attach event listener to the deal_button button
 document.getElementById("deal_button").onclick = function() {
 
-    restartGame();
+    resetGame();
     loadGame();
+}
+
+// Attach event listener to the hit_button button
+document.getElementById("hit_button").onclick = function() {
+    playerTurn(); 
+
+    if (pScore > 21) {
+        document.getElementById("hit_button").disabled = true;
+        document.getElementById("stand_button").disabled = true;
+
+        flipDealerCard();
+
+        // Dealer plays until they reach at least 17
+        while (dScore < 17) {
+            dealerTurn();
+        }
+
+        checkWinner();
+    }
+
+}
+
+// Attach event listener to the stand_button button
+document.getElementById("stand_button").onclick = function() {
+
+    document.getElementById("hit_button").disabled = true;
+    document.getElementById("stand_button").disabled = true;
+
+    flipDealerCard();
+
+    while (dScore < 17) {
+        dealerTurn();
+    }
+
+    checkWinner();
 }
