@@ -90,7 +90,7 @@ h1 {
 }
 
 
-@media only screen and (min-width: 400px) {
+@media (min-width: 400px) {
 
     #dealer_cards_div img,
     #player_cards_div img {
