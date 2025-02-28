@@ -36,6 +36,12 @@ h1 {
     font-weight: bold;
 }
 
+#dealer_cards_div, 
+#player_cards_div {
+    width: 100%; 
+    height: 190px;
+}
+
 #dWinner,
 #pWinner {
     color: #3cdcf1;
@@ -46,9 +52,9 @@ h1 {
 #deal_button {
     color: bisque;
     background-color: #a504d1;
-    width: 90px;
+    width: 100px;
     height: 40px;
-    font-size: .75em;
+    font-size: 0.75em;
     font-weight: bold;
     border-radius: 10px;
     border: none;
@@ -59,11 +65,11 @@ h1 {
 #hit_button,
 #stand_button {
     margin: 10px;
+    font-size: 1em;
     color: bisque;
     background-color: #a504d1;
     width: 100px;
     height: 40px;
-    font-size: .75em;
     font-weight: bold;
     border-radius: 10px;
     border: none;
@@ -73,9 +79,12 @@ h1 {
 
 #hit_button:disabled,
 #stand_button:disabled,
-#deal_button:disabled {
-    background-color: #cc51ee;
-    color: bisque; 
+#deal_button:disabled,
+#bet_amt_5:disabled,
+#bet_amt_10:disabled,
+#bet_amt_25:disabled,
+#bet_amt_50:disabled,
+#bet_amt_100:disabled {
     cursor: not-allowed; 
     opacity: 0.5;
 }
@@ -115,6 +124,8 @@ h1 {
 #bet_amt_25,
 #bet_amt_50,
 #bet_amt_100 {
+    color: rgb(255, 255, 255);
+    font-size: 0.75em;
     font-weight: bold;
     width: 50px;
     height: 35px;
@@ -143,12 +154,6 @@ h1 {
 
 #bet_amt_100 {
     background-color: #b90909;
-}
-
-#dealer_cards_div, 
-#player_cards_div {
-    width: 100%; 
-    height: 190px;
 }
 
 #player_message {
