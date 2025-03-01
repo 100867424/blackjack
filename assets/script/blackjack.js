@@ -236,19 +236,34 @@ function checkWinner() {
     } else if (result == "PUSH") {
         bank = bank + totalBet;
     }
-   
-    totalBet = 0;
 
-    document.getElementById("player_bank").innerHTML = bank;
-    document.getElementById("player_bet").innerHTML = totalBet;
+    if (bank == 0) {
 
-    document.getElementById("bet_amt_5").disabled = false;
-    document.getElementById("bet_amt_10").disabled = false;
-    document.getElementById("bet_amt_25").disabled = false;
-    document.getElementById("bet_amt_50").disabled = false;
-    document.getElementById("bet_amt_100").disabled = false;
+        document.getElementById("bet_amt_5").disabled = true;
+        document.getElementById("bet_amt_10").disabled = true;
+        document.getElementById("bet_amt_25").disabled = true;
+        document.getElementById("bet_amt_50").disabled = true;
+        document.getElementById("bet_amt_100").disabled = true;
 
-    document.getElementById("message").innerHTML = "Place Bet!";
+        document.getElementById("message").innerHTML = "Restart Game!";
+
+    } else {
+
+        totalBet = 0;
+
+        document.getElementById("player_bank").innerHTML = bank;
+        document.getElementById("player_bet").innerHTML = totalBet;
+
+        document.getElementById("bet_amt_5").disabled = false;
+        document.getElementById("bet_amt_10").disabled = false;
+        document.getElementById("bet_amt_25").disabled = false;
+        document.getElementById("bet_amt_50").disabled = false;
+        document.getElementById("bet_amt_100").disabled = false;
+
+        document.getElementById("message").innerHTML = "Place Bet!";
+
+    }
+    
 }
 
 
