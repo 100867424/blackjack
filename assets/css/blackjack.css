@@ -170,7 +170,7 @@ h1 {
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 400px) {
 
     #dealer_cards_div img:first-child,
     #player_cards_div img:first-child {
