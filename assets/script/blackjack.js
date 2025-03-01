@@ -1,6 +1,9 @@
-function startScreen() {
-
+function loadBank() {
     bank = 500;
+}
+
+
+function startScreen() {
 
     for(let i = 0; i < 2; i++) {
 
@@ -283,6 +286,7 @@ let result = "";
 let dealerCardOneHidden = "";
 let houseDeck = [];
 
+loadBank();
 startScreen();
 
 // Attach event listener to the deal_button button
