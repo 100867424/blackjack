@@ -236,7 +236,7 @@ h1 {
 
     #deal_button {
         width: 100px;
-        height: 30px;
+        height: 40px;
         font-size: 1em;
         font-weight: bold;
     }
@@ -245,7 +245,7 @@ h1 {
     #stand_button {
         margin: 5px;
         width: 100px;
-        height: 30px;
+        height: 40px;
         font-size: 1em;
         font-weight: bold;
     }
