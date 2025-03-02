@@ -71,14 +71,18 @@ function newDeal() {
 function generateDeck() {
 
     let deck = [];
-    let suit = ["D", "H", "C", "S"];
-    let rank = [2,3,4,5,6,7,8,9,10,"A","J","Q","K"];
 
-    for(let i = 0; i < suit.length; i++) {
-        for(let j = 0; j < rank.length; j++) {
+    for(let i = 0; i < 4; i++) {
 
-            deck.push(rank[j] + "-" + suit[i]);
+        let suit = ["D", "H", "C", "S"];
+        let rank = [2,3,4,5,6,7,8,9,10,"A","J","Q","K"];
 
+        for(let i = 0; i < suit.length; i++) {
+            for(let j = 0; j < rank.length; j++) {
+
+                deck.push(rank[j] + "-" + suit[i]);
+
+            }
         }
     }
 
